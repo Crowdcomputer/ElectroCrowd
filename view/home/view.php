@@ -1,0 +1,1 @@
+<p class="center muted">This is a resource annotation system, designed for using crowdsourcing techniques.</p>

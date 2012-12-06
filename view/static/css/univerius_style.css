@@ -1,0 +1,13 @@
+/* 
+    Document   : univerius_style
+    Created on : Dec 5, 2012, 2:26:04 PM
+    Author     : pavelk
+    Description:
+        Use everybody who wants
+*/
+.center{
+    text-align:center;
+}
+.muted{
+    color: #999 !important;
+}
