@@ -10,11 +10,11 @@ if (isset($CC_input)) {
         <table class = "table table-hover table-bordered">
             <tbody>
                 <?php
-                $category_list=getObjects('category','','','array');
+                $category_list = getObjects('category', '', '', 'array');
                 //pre($category_list);
                 $i = 0;
                 foreach ($CC_input['resource_id'] as $id) {
-                    
+
                     $resource = getObjects('resource', 'id', $id, 'array');
                     if (isset($resource[0])) {
                         ?>
@@ -23,32 +23,46 @@ if (isset($CC_input)) {
                                 <input type="hidden" name="resource[]" value="<?php echo $resource[0]['id']; ?>">
                                 <img class="resource_image" src="<?php echo $resource[0]['url']; ?>" />
                             </td>
-                            <td>
-                                <h5>category</h5>
-                                <select name="category[]">
-                                    <?php
-                                $category_resource=getObjects('category_resource','id',$CC_input['category_resource_id'][$i],'array');
-                                $cat_id=$category_resource[0]['category_id'];
-                                foreach($category_list as $category){
-                                    ?>
-                                     <option <?php if ($category['id']==$cat_id) echo " selected "; ?> value="<?php echo $category['id']; ?>"><?php echo $category['title']; ?></option>
-                                    <?php
-                                }                                               
-                                ?>
-                                </select>
-                                <input type="hidden" name="category_resource_id[]" value="<?php echo $CC_input['category_resource_id'][$i]; ?>">
-                                <h5>annotation</h5>
-                                
+                            <td> <h5>category</h5> 
                                 <?php
-                                $annotation_resource=getObjects('annotation_resource','id',$CC_input['annotation_resource_id'][$i],'array');
-                                $annotation=getObjects('annotation','id',$annotation_resource[0]['annotation_id'],'array');
+                                $categories = explode(",", $CC_input['category_resource_id'][$i]);
+                                if ($categories) {
+                                    foreach ($categories as $category_id) {
+                                        ?>
+
+                                        <select name="category[]">
+                                            <?php
+                                            $category_resource = getObjects('category_resource', 'id', $category_id, 'array');
+                                            $cat_id = $category_resource[0]['category_id'];
+                                            foreach ($category_list as $category) {
+                                                ?>
+                                                <option <?php if ($category['id'] == $cat_id) echo " selected "; ?> value="<?php echo $category['id']; ?>"><?php echo $category['title']; ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <input type="hidden" name="category_resource_id[]" value="<?php echo $category_id; ?>">
+                                        <?php
+                                    }
+                                }
                                 ?>
-                                <input type="hidden" name="annotation_id[]" value="<?php echo $annotation[0]['id']; ?>">
-                                <textarea name="annotation[]" class="resource_annotation" row="3"><?php echo $annotation[0]['title']; ?></textarea>
+
+                                <h5>annotation</h5>
+                                <?php
+                                $annotations = explode(",", $CC_input['annotation_resource_id'][$i]);
+                                if ($annotations) {
+                                    foreach ($annotations as $anotation_id) {
+                                        $annotation_resource = getObjects('annotation_resource', 'id', $anotation_id, 'array');
+                                        $annotation = getObjects('annotation', 'id', $annotation_resource[0]['annotation_id'], 'array');
+                                        ?>
+                                        <input type="hidden" name="annotation_id[]" value="<?php echo $annotation[0]['id']; ?>">
+                                        <textarea name="annotation[]" class="resource_annotation" row="3"><?php echo $annotation[0]['title']; ?></textarea>
+                                        <?php
+                                    }
+                                }
+                                ?>
                             </td>
                             <?php
-                        
-                            
                         }
                         $i++;
                     }
