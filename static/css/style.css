@@ -1,0 +1,18 @@
+.jumbotron{
+    background: none;
+
+}
+iframe{
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    width:90%;
+    height:600px;
+}
+.brand img{
+    height:17px;
+}
+body{
+    background-image: url(../img/escheresque_ste.png);
+}

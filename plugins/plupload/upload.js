@@ -1,11 +1,10 @@
-var resources=new Array();
 $(function() {
     var uploader = new plupload.Uploader({
         runtimes : 'gears,html5,flash,silverlight,browserplus',
         browse_button : 'pickfiles',
         container : 'container',
         max_file_size : '10mb',
-        url : 'controller/functions.php?function=upload',
+        url : ajax_path+'&function=upload',
         flash_swf_url : 'plugins/plupload/js/plupload.flash.swf',
         silverlight_xap_url : 'plugins/plupload/js/plupload.silverlight.xap',
         filters : [
@@ -15,9 +14,9 @@ $(function() {
         },
         ],
         resize : {
-            width : 800, 
-            height : 600, 
-            quality : 90
+            width : 400, 
+            height : 200, 
+            quality : 80
         }
     });
     uploader.bind('Init', function(up, params) {
@@ -50,12 +49,13 @@ $(function() {
         up.refresh(); // Reposition Flash/Silverlight
     });
     uploader.bind('FileUploaded', function(up, file, info) {
+        //console.log(info.response);
         var json = jQuery.parseJSON(info.response);
         var resource = new Object();
         resource.id = json.id;
-        resource.url = 'http://univerius.com/view/static/files/resources/'+json.id;
         resources.push(resource);
         $('#' + file.id + " b").html("100%");
+        //console.log(resources);
     });
 });
 

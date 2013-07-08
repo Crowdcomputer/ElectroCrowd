@@ -1,0 +1,17 @@
+/* 
+    Document   : plans
+    Created on : Feb 19, 2013, 9:45:57 PM
+    Author     : pavelk
+    Description:
+        Purpose of the stylesheet follows.
+
+*/
+
+
+.carousel .item{
+    text-align:center;
+    height:600px;
+}
+.carousel .item > *{
+    width:90%;
+}

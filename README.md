@@ -1,4 +1,4 @@
-resource-management-system
-==========================
+BMRU
+====
 
-Resource-management-system
+A music player for the BMRU company
