@@ -1,4 +1,4 @@
-BMRU
+ELECTROCROWD APP
 ====
 
-A music player for the BMRU company
+An application for digital pictures classification
